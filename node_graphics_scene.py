@@ -1,0 +1,54 @@
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import QPen, QColor
+import math
+
+class QDMGraphicsScene(QGraphicsScene):
+    def __init__(self, parent = None):
+        super().__init__(parent)
+
+        self.gridSize = 20
+
+        self._color_background = QColor("#393939")
+        self._color_light = QColor("#2f2f2f")
+        self._color_dark = QColor("#292929")
+
+        self._pen_light = QPen(self._color_light)
+        self._pen_light.setWidth(1)
+        self._pen_dark = QPen(self._color_dark)
+        self._pen_dark.setWidth(2)
+
+        self.setBackgroundBrush(self._color_background)
+
+        self.scene_width, self.scene_height = 64000, 64000
+        self.setSceneRect(-self.scene_width // 2, -self.scene_height // 2, self.scene_width, self.scene_height)
+
+    def drawBackground(self, painter, rect):
+        super().drawBackground(painter, rect)
+
+        left = int(math.floor(rect.left()))
+        right = int(math.ceil(rect.right()))
+        top = int(math.floor(rect.top()))
+        bottom = int(math.ceil(rect.bottom()))
+
+        first_left = left - (left % self.gridSize)
+        first_top = top - (top % self.gridSize)
+        lines_light, line_dark = [], []
+        for x in range(first_left, right, self.gridSize):
+            if (x % 100 != 0):
+                lines_light.append(QLine(x, top, x, bottom))
+            else:
+                line_dark.append(QLine(x, top, x, bottom))
+
+        for y in range(first_top, bottom, self.gridSize):
+            if (y % 100 != 0):
+                lines_light.append(QLine(left, y, right, y))
+            else:
+                line_dark.append(QLine(left, y, right, y))
+
+        painter.setPen(self._pen_light)
+        for i in lines_light:
+            painter.drawLine(i)
+        painter.setPen(self._pen_dark)
+        for i in line_dark:
+            painter.drawLine(i)
