@@ -1,6 +1,8 @@
-from PyQt5.QtWidgets import QMainWindow, QGraphicsView, QApplication, QSizePolicy
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 from node_graphics_scene import QDMGraphicsScene
+from node_graphics_view import QDMGraphicsView
 import sys
 from Ui_MainWindow import Ui_MainWindow
 
@@ -11,8 +13,37 @@ class NodeEditWind(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.grScene = QDMGraphicsScene()
+        self.graphicsView = QDMGraphicsView(self.grScene)
+        self.horizontalLayout.addWidget(self.graphicsView)
 
-        self.graphicsView.setScene(self.grScene)
+        self.addDebugContent()
+
+    def addDebugContent(self):
+        greenBrush = QBrush(Qt.green)
+        outlinePen = QPen(Qt.black)
+        outlinePen.setWidth(2)
+
+        rect = self.grScene.addRect(-100, -100, 80, 100, outlinePen, greenBrush)
+        rect.setFlag(QGraphicsItem.ItemIsMovable)
+
+        text = self.grScene.addText("不错！！！", QFont("Ubuntu"))
+        text.setFlag(QGraphicsItem.ItemIsSelectable)
+        text.setFlag(QGraphicsItem.ItemIsMovable)
+        text.setDefaultTextColor(QColor.fromRgbF(1.0, 1.0, 1.0))
+
+        widget1 = QPushButton("Hello world")
+        proxy1 = self.grScene.addWidget(widget1)
+        proxy1.setFlag(QGraphicsItem.ItemIsMovable)
+        proxy1.setPos(0, 30)
+
+        widget2 = QTextEdit()
+        proxy2 = self.grScene.addWidget(widget2)
+        proxy2.setFlag(QGraphicsItem.ItemIsSelectable)
+        proxy2.setPos(0, 60)
+
+        line = self.grScene.addLine(-200, -200, 400, -100, outlinePen)
+        line.setFlag(QGraphicsItem.ItemIsSelectable)
+        line.setFlag(QGraphicsItem.ItemIsMovable)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
