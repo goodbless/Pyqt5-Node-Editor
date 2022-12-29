@@ -20,7 +20,7 @@ class QDMGraphicsScene(QGraphicsScene):
 
         self.setBackgroundBrush(self._color_background)
 
-        self.scene_width, self.scene_height = 64000, 64000
+        self.scene_width, self.scene_height = 6400, 6400
         self.setSceneRect(-self.scene_width // 2, -self.scene_height // 2, self.scene_width, self.scene_height)
 
     def drawBackground(self, painter, rect):
