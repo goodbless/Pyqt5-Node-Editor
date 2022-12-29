@@ -4,10 +4,13 @@ from PyQt5.QtGui import QPen, QColor
 import math
 
 class QDMGraphicsScene(QGraphicsScene):
-    def __init__(self, parent = None):
+    def __init__(self, scene, parent = None):
         super().__init__(parent)
 
+        self.scene = scene
+
         self.gridSize = 20
+        self.gridSquares = 5
 
         self._color_background = QColor("#393939")
         self._color_light = QColor("#2f2f2f")
@@ -20,8 +23,9 @@ class QDMGraphicsScene(QGraphicsScene):
 
         self.setBackgroundBrush(self._color_background)
 
-        self.scene_width, self.scene_height = 6400, 6400
-        self.setSceneRect(-self.scene_width // 2, -self.scene_height // 2, self.scene_width, self.scene_height)
+        
+    def setGrScene(self, width, height):
+        self.setSceneRect(-width //2 , -height // 2, width, height)
 
     def drawBackground(self, painter, rect):
         super().drawBackground(painter, rect)

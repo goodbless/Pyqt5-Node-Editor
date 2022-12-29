@@ -5,6 +5,7 @@ from node_graphics_scene import QDMGraphicsScene
 from node_graphics_view import QDMGraphicsView
 import sys
 from Ui_MainWindow import Ui_MainWindow
+from node_scene import Scene
 
 
 class NodeEditWind(QMainWindow, Ui_MainWindow):
@@ -12,7 +13,8 @@ class NodeEditWind(QMainWindow, Ui_MainWindow):
         super(NodeEditWind, self).__init__(parent)
         self.setupUi(self)
 
-        self.grScene = QDMGraphicsScene()
+        self.scene = Scene()
+        self.grScene = self.scene.grScene
         self.graphicsView = QDMGraphicsView(self.grScene)
         self.horizontalLayout.addWidget(self.graphicsView)
 
