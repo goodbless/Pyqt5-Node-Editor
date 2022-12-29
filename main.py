@@ -6,6 +6,7 @@ from node_graphics_view import QDMGraphicsView
 import sys
 from Ui_MainWindow import Ui_MainWindow
 from node_scene import Scene
+from node_node import Node
 
 
 class NodeEditWind(QMainWindow, Ui_MainWindow):
@@ -18,7 +19,8 @@ class NodeEditWind(QMainWindow, Ui_MainWindow):
         self.graphicsView = QDMGraphicsView(self.grScene)
         self.horizontalLayout.addWidget(self.graphicsView)
 
-        self.addDebugContent()
+        node = Node(self.scene, "这是一个节点")
+        #self.addDebugContent()
 
     def addDebugContent(self):
         greenBrush = QBrush(Qt.green)
