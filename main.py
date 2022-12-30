@@ -19,7 +19,7 @@ class NodeEditWind(QMainWindow, Ui_MainWindow):
         self.graphicsView = QDMGraphicsView(self.grScene)
         self.horizontalLayout.addWidget(self.graphicsView)
 
-        node = Node(self.scene, "这是一个节点")
+        node = Node(self.scene, "这是一个节点",inputs=[1,2,3],outputs=[1])
         #self.addDebugContent()
 
     def addDebugContent(self):

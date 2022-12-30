@@ -3,7 +3,7 @@ from node_widget import QDMNodeContentWidget
 from PyQt5.QtCore import QFile
 
 class Node():
-    def __init__(self, scene, title="Undefined Node") -> None:
+    def __init__(self, scene, title="Undefined Node", inputs=[], outputs=[]) -> None:
         self.scene = scene
 
         self.title = title
@@ -14,8 +14,8 @@ class Node():
         self.scene.addNode(self)
         self.scene.grScene.addItem(self.grNode)
 
-        self.inputs = []
-        self.output = []
+        self.inputs = inputs
+        self.outputs = outputs
 
         self.stylesheet_filename = 'qss/nodestyle.qss'
         self.loadStylesheet(self.stylesheet_filename)
