@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 class QMGraphicsNode(QGraphicsItem):
     def __init__(self, node, title='Node Graphics Item', parent=None) -> None:
         super().__init__(parent)
-
+        self.node = node
         self._title_color = Qt.GlobalColor.white
         self._title_font = QFont("Ubuntu", 10)
 
@@ -17,6 +17,7 @@ class QMGraphicsNode(QGraphicsItem):
 
         self.initTitle()
         self.title = title
+        self.content = self.node.content
 
         self._pen_default = QPen(QColor("#7f000000"))
         self._pen_selected = QPen(QColor("#FFFFA637"))
@@ -25,6 +26,7 @@ class QMGraphicsNode(QGraphicsItem):
         self._brush_background = QBrush(QColor("#e3212121"))
 
         self.initUI()
+        self.initContent()
 
     def boundingRect(self) -> QRectF:
         return QRectF(0,0,2 * self.edge_size + self.width, 2 * self.edge_size + self.height).normalized()
@@ -39,6 +41,11 @@ class QMGraphicsNode(QGraphicsItem):
         self.title_item.setFont(self._title_font)
         self.title_item.setPos(self._padding, 0)
         self.title_item.setTextWidth(self.width - 2 * self._padding)
+
+    def initContent(self):
+        self.grContent = QGraphicsProxyWidget(self)
+        self.content.setGeometry(self.edge_size,self.title_height+self.edge_size,self.width -2*self.edge_size, self.height - 2*self.edge_size - self.title_height)
+        self.grContent.setWidget(self.content)
 
     @property
     def title(self):
