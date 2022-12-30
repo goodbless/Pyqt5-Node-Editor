@@ -32,6 +32,12 @@ class QDMGraphicsEdge(QGraphicsPathItem):
     def updatePath(self):
         raise NotImplemented("This method has to be overriden in a child class")
 
+    def setSource(self, x, y):
+        self.posSource = [x, y]
+
+    def setDestination(self, x, y):
+        self.posDestination = [x, y]
+
 
 class QDMCGraphicsEdgeDirect(QDMGraphicsEdge):
     def updatePath(self):

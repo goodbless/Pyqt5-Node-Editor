@@ -83,3 +83,7 @@ class QMGraphicsNode(QGraphicsItem):
         painter.setPen(Qt.NoPen)
         painter.setBrush(self._brush_background)
         painter.drawPath(path_content.simplified())
+
+    def mouseMoveEvent(self, event: 'QGraphicsSceneMouseEvent') -> None:
+        super().mouseMoveEvent(event)
+        self.node.updateConnectedEdges()

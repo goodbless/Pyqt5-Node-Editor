@@ -46,7 +46,7 @@ class Node():
         else:
             y = index * self.socket_spacing + self.grNode.title_height + self.grNode._padding + self.grNode.edge_size
 
-        return x, y
+        return [x, y]
 
     def loadStylesheet(self, filename):
         print('STYLE loading', filename)
@@ -61,3 +61,8 @@ class Node():
 
     def setPos(self, x, y):
         self.grNode.setPos(x, y)
+
+    def updateConnectedEdges(self):
+        for socket in self.inputs + self.outputs:
+            if socket.hasEdge():
+                socket.edge.updatePosition()
