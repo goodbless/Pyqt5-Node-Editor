@@ -7,7 +7,7 @@ import sys
 from Ui_MainWindow import Ui_MainWindow
 from node_scene import Scene
 from node_node import Node
-
+from node_edge import Edge
 
 class NodeEditWind(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
@@ -19,8 +19,21 @@ class NodeEditWind(QMainWindow, Ui_MainWindow):
         self.graphicsView = QDMGraphicsView(self.grScene)
         self.horizontalLayout.addWidget(self.graphicsView)
 
-        node = Node(self.scene, "这是一个节点",inputs=[1,2,3],outputs=[1])
+        self.addNode()
         #self.addDebugContent()
+
+    def addNode(self):
+        node1 = Node(self.scene,"这是第一个节点",inputs=[1,2,3],outputs=[1])
+        node2 = Node(self.scene,"这是第二个节点",inputs=[1,2,3],outputs=[1])
+        node3 = Node(self.scene,"这是第三个节点",inputs=[1,2,3],outputs=[1])
+
+        node1.setPos(-350, -250)
+        node2.setPos(-75, 0)
+        node3.setPos(200, -150)
+
+        edge1 = Edge(self.scene, node1.outputs[0],node2.inputs[0])
+        edge2 = Edge(self.scene, node2.outputs[0],node3.inputs[0], type=2)
+        
 
     def addDebugContent(self):
         greenBrush = QBrush(Qt.green)

@@ -54,3 +54,10 @@ class Node():
         file.open(QFile.ReadOnly | QFile.Text)
         stylesheet = file.readAll()
         self.content.setStyleSheet(str(stylesheet, encoding='utf-8'))
+
+    @property
+    def pos(self):
+        return self.grNode.pos()
+
+    def setPos(self, x, y):
+        self.grNode.setPos(x, y)
