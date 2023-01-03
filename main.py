@@ -23,9 +23,9 @@ class NodeEditWind(QMainWindow, Ui_MainWindow):
         #self.addDebugContent()
 
     def addNode(self):
-        node1 = Node(self.scene,"这是第一个节点",inputs=[1,2,3],outputs=[1])
-        node2 = Node(self.scene,"这是第二个节点",inputs=[1,2,3],outputs=[1])
-        node3 = Node(self.scene,"这是第三个节点",inputs=[1,2,3],outputs=[1])
+        node1 = Node(self.scene,"这是第一个节点",inputs=[0,0,0],outputs=[3])
+        node2 = Node(self.scene,"这是第二个节点",inputs=[1,1,1],outputs=[3])
+        node3 = Node(self.scene,"这是第三个节点",inputs=[2,2,2],outputs=[3])
 
         node1.setPos(-350, -250)
         node2.setPos(-75, 0)

@@ -6,15 +6,16 @@ RIGHT_TOP = 3
 RIGHT_BOTTOM = 4
 
 class Socket():
-    def __init__(self, node, index=0, position=LEFT_TOP) -> None:
+    def __init__(self, node, index=0, position=LEFT_TOP, socket_type=1) -> None:
         
         self.node = node
         self.index = index
         self.position = position
+        self.socket_type = socket_type
 
         self.edge = None
 
-        self.grSocket = QDMGraphicsSocket(self.node.grNode)
+        self.grSocket = QDMGraphicsSocket(self.node.grNode, self.socket_type)
 
         self.grSocket.setPos(*self.node.getSocketPosition(index, position))
 
